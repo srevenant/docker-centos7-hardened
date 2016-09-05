@@ -1,0 +1,7 @@
+_name=centos7-hardened
+_org=srevenant
+# NO_DOCKER_CACHE if defined will add --no-cache to docker build
+# BUILD_VERSION, if defined, will add it as a tag to the build image
+export DOCKER_IMAGE=${_org}/${_name}
+export DOCKER_NAME=${_name}
+export DOCKER_TAGS=    # a list of tags to add to the build
