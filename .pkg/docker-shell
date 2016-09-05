@@ -1,0 +1,21 @@
+#!/bin/bash
+
+image=$DOCKER_IMG # comes from environ
+
+if [ -z "$image" ]; then
+	echo "Syntax: $0 {docker image name}"
+	exit 1
+fi
+
+ps=$(docker ps -f name=$DOCKER_IMG --format="{{.ID}} {{.Image}} {{.CreatedAt}}")
+echo "$ps"
+lastid=$(echo "$ps" | tail -1 | awk '{print $1}')
+
+if [ -z "$lastid" ]; then
+	echo "No running container for ${DOCKER_IMG}" 1>&2
+	echo "-c echo"
+else
+	echo "Connecting to container... < you can add: alias dsh='bash \$(action shell)'" 1>&2
+	echo "docker exec -i -t $lastid /bin/bash"
+fi
+

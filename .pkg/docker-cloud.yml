@@ -1,0 +1,19 @@
+ops-batleth-t1:
+  image: kuali/ops-batleth:tst
+  environment:
+    - 'EPHEMER_SERVICE=ops-batleth-t1'
+    - 'EPHEMER_URL=https://deploy.kuali.co/dse/'
+    - 'EPHEMER_SECRET=iamthewalrus'
+    - 'EPHEMER_TOKEN=dseuser'
+    - 'EPHEMER_APIKEY=insert'
+  ports:
+    - "4000"
+  dns_search:
+    - kuali.co
+    - private
+  tags:
+    - saas-t1
+  autoredeploy: true
+  sequential_deployment: true
+  deployment_strategy: high_availability
+  target_num_containers: 2

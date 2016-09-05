@@ -1,0 +1,58 @@
+{
+    "config" : {
+        "product": "srevenant/hardened-centos"
+    },
+    "setenv": {
+        "DOCKER_CACHE": "true",
+        "DOCKER_IMG": "${product}"
+    },
+    "actions": {
+        "push": {
+            "type": "docker-push",
+            "image": "${DOCKER_IMG}"
+        },
+        "build": {
+            "type": "docker-build",
+            "image": "${DOCKER_IMG}",
+            "tags": [],
+            "args": [],
+            "setenv": {
+                "PKG_VERSION": "${BUILD_VERSION}"
+            }
+        },
+        "build-run": {
+            "type": "group",
+            "actions": ["build", "run"]
+        },
+        "build-nocache": {
+            "type": "docker-build",
+            "image": "${DOCKER_IMG}",
+            "setenv": {
+                "NO_DOCKER_CACHE": "true"
+            }
+        },
+        "run": {
+            "type": "script",
+            "target": "docker-run"
+        },
+        "docker-login": {
+            "type": "script"
+        },
+        "shell": {
+            "target": "docker-shell",
+            "type": "script"
+        },
+        "clean": {
+            "target": "docker-clean",
+            "type": "script"
+        },
+        "create-repo": {
+            "target": "docker-create-repo",
+            "type": "script"
+        },
+        "assemble": {
+            "type": "group",
+            "actions": ["docker-login", "build", "push"]
+        }
+    }
+}

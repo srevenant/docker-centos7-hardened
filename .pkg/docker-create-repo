@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#export repo="762926010197.dkr.ecr.us-west-2.amazonaws.com"
+#export app="cor-main"
+#export BUILD_VERSION="1607.0004"
+
+echo aws ecr create-repository --repository-name $DOCKER_IMG
+
+#img=$repo/kuali/$app
+#docker build -t $img:$BUILD_VERSION $img:stg .
+

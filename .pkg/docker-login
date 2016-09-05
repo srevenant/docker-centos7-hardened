@@ -1,0 +1,10 @@
+#!/bin/bash
+
+exit
+# using virtualenv, we have a known good version of aws cli here
+if [ -d ~/vaws ]; then
+	source ~/vaws/bin/activate
+fi
+
+# get login and activate it
+$(aws ecr get-login)
